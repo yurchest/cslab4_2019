@@ -43,7 +43,8 @@ print_in_binary(uint8_t byte) {
     }
 }
 
-void print_in_binary(const void* data, size_t size){
+void
+print_in_binary(const void* data, size_t size){
 
     const uint8_t* bytes = reinterpret_cast<const uint8_t*>(data);
 
@@ -53,5 +54,54 @@ void print_in_binary(const void* data, size_t size){
             cout << '\n';
         else
             cout << ' ';
+    }
+}
+
+void
+byte_calc( uint16_t first, uint16_t second, char oper ) {
+    uint16_t byteand = first & second;
+    uint16_t byteor = first | second;
+    uint16_t bytexor = first ^ second;
+    switch( oper )
+    {
+        case '&':
+            print_in_hex( &first, sizeof(first) );
+            cout << "& ";
+            print_in_hex( &second, sizeof(second) );
+            cout << "= ";
+            print_in_hex( &byteand, sizeof(byteand) );
+            cout << "\n";
+            print_in_binary( &first, sizeof(first) );
+            cout << "& ";
+            print_in_binary( &second, sizeof(second));
+            cout << "= ";
+            print_in_binary( &byteand, sizeof(byteand) );
+            break;
+        case '|':
+            print_in_hex( &first, sizeof(first));
+            cout << "| ";
+            print_in_hex( &second, sizeof(second) );
+            cout << "= ";
+            print_in_hex( &byteand, sizeof(byteand) );
+            cout << "\n";
+            print_in_binary( &first, sizeof(first) );
+            cout << "| ";
+            print_in_binary( &second, sizeof(second) );
+            cout << "= ";
+            print_in_binary( &byteor, sizeof(byteor) );
+            break;
+        case '^':
+            print_in_hex( &first, sizeof(first));
+            cout << "^ ";
+            print_in_hex( &second, sizeof(second) );
+            cout << "= ";
+            print_in_hex( &byteand, sizeof(byteand) );
+            cout << "\n";
+            print_in_binary( &first, sizeof(first) );
+            cout << "^ ";
+            print_in_binary( &second, sizeof(second) );
+            cout << "= ";
+            print_in_binary( &bytexor, sizeof(bytexor) );
+            break;
     }
 }
