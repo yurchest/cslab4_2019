@@ -28,3 +28,30 @@ void print_in_hex(const void* data, size_t datasize){
     }
 }
 
+char
+bit_digit(uint8_t byte, uint8_t bit) {
+    if (byte & (0x1 << bit)) {
+        return '1';
+    }
+    return '0';
+}
+
+void
+print_in_binary(uint8_t byte) {
+    for (int bit = 7; bit >= 0; bit--) {
+        cout << bit_digit(byte, bit);
+    }
+}
+
+void print_in_binary(const void* data, size_t size){
+
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>(data);
+
+    for (size_t i = 0; i < size; i++){
+        print_in_binary(bytes[i]);
+        if ( (i + 1) % 4 == 0 )
+            cout << '\n';
+        else
+            cout << ' ';
+    }
+}
